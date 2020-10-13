@@ -46,6 +46,9 @@ public class ReceiveKlubb extends AbstractAppServlet {
         out.format("<h1>Klubb:%s", klubb);
         out.println("<table classname='table table-dark'>");
         out.println("<tr style= border: 2px solid: black;>");
+        out.println("<th scope=col> Rank </th>");
+        out.println("<th scope=col> Score </th>");
+        out.println("<th scope=col> Navn </th>");
         out.println("<th scope=col> Klubb </th>");
         out.println("</tr>");
         /**
