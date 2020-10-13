@@ -57,7 +57,7 @@ public class ReceiveUserNameFromDb extends AbstractAppServlet {
          */
         for (TableModel model : tableModelList) {
 
-            out.format("<tr> <td> %s </td><td> %s </td> <td>  %s </td> <td>  %s </td></tr>",
+            out.format("<tr style= border: 2px solid: black;> <td> %s </td><td> %s </td> <td>  %s </td> <td>  %s </td></tr>",
                     model.getRank(), model.getScore(),model.getNavn(), model.getKlubb());
         }
         req.setAttribute("liste", tableModelList);

@@ -40,10 +40,10 @@ public class ReceiveKlubb extends AbstractAppServlet {
     @Override
     protected void writeBody(HttpServletRequest req, HttpServletResponse res, PrintWriter out) throws ServletException, IOException {
         String klubb = req.getParameter("uklubb");
-        String klubbFromDn = UserRepository.getKlubb(klubb, out);
+        List<TableModel> klubbFromDn = UserRepository.getKlubb(klubb, out);
         //req.getRequestDispatcher("viewSearch.jsp").forward(req, res);
 
-        out.println("<h1>Klubb: ");
+        out.format("<h1>Klubb:%s", klubb);
         out.println("<table classname='table table-dark'>");
         out.println("<tr style= border: 2px solid: black;>");
         out.println("<th scope=col> Klubb </th>");
@@ -52,8 +52,12 @@ public class ReceiveKlubb extends AbstractAppServlet {
          * Looper over the list
          * print out rank, score name and club
          */
-        out.format("<tr> <td style= border: 2px solid: black;> %s </td></tr>", klubbFromDn);
+        for (TableModel model : klubbFromDn) {
 
+            out.format("<tr style= border: 2px solid: black;> <td> %s </td><td> %s </td> <td>  %s </td> <td>  %s </td></tr>",
+                    model.getRank(), model.getScore(),model.getNavn(), model.getKlubb());
+        }
+        req.setAttribute("liste", klubbFromDn);
     }
 
 

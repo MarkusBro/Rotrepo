@@ -51,25 +51,29 @@ public class UserRepository {
     /**
      * henter ut spesifikk person fra databasen
      *
-     * @param username brukerens epost-addresse ("trym@example.com");
-     * @param p        printwriter see metoden over.
+     * @param klubb brukerens epost-addresse ("trym@example.com");
+     * @param p     printwriter see metoden over.
      * @return et String objekt med eposten til brukeren.
      */
 
-    public static String getKlubb(String klubb, PrintWriter p) {
+    public static List<TableModel> getKlubb(String klubb, PrintWriter p) {
         Connection db = null;
         PreparedStatement prepareStatement = null;
-
-        String toReturn = null;
+        List<TableModel> toReturn = new ArrayList<>();
         try {
             db = DbTool.getINSTANCE().dbLoggIn(p);
             ResultSet rs = null;
-            String query = "SELECT * FROM mytable where klubb = ?";
+            String query = "SELECT * FROM mytable where Klubb  = ?";
             prepareStatement = db.prepareStatement(query);
             prepareStatement.setString(1, klubb);
             rs = prepareStatement.executeQuery();
             while (rs.next()) {
-                toReturn = rs.getString("klubb");
+                TableModel getTableModel = new
+                        TableModel(rs.getInt("Rank"), rs.getDouble("score"), rs.getInt("Født"), rs.getString("Navn"),
+                        rs.getString("Klubb"), rs.getTime("2000_meter"), rs.getTime("3000_meter"), rs.getInt("60_meter"),
+                        rs.getInt("krhev"), rs.getDouble("sargeant"), rs.getInt("beveg"));
+
+                toReturn.add(getTableModel);
 
             }
             rs.close();
@@ -82,11 +86,11 @@ public class UserRepository {
 
     }
 
-    public static List<TableModel>getResults(PrintWriter printWriter) {
+    public static List<TableModel> getResults(PrintWriter printWriter) {
         Connection db = null;
         PreparedStatement prepareStatement = null;
 
-        List<TableModel> toReturn =  new ArrayList<>();
+        List<TableModel> toReturn = new ArrayList<>();
         try {
             db = DbTool.getINSTANCE().dbLoggIn(printWriter);
             ResultSet rs = null;
@@ -94,10 +98,10 @@ public class UserRepository {
             prepareStatement = db.prepareStatement(query);
             rs = prepareStatement.executeQuery();
             while (rs.next()) {
-                    TableModel getTableModel = new
-                            TableModel(rs.getInt("Rank"),rs.getDouble("score"),rs.getInt("Født"),rs.getString("Navn"),
-                            rs.getString("Klubb"),rs.getTime("2000_meter"),rs.getTime("3000_meter"),rs.getInt("60_meter"),
-                            rs.getInt("krhev"),rs.getDouble("sargeant"),rs.getInt("beveg"));
+                TableModel getTableModel = new
+                        TableModel(rs.getInt("Rank"), rs.getDouble("score"), rs.getInt("Født"), rs.getString("Navn"),
+                        rs.getString("Klubb"), rs.getTime("2000_meter"), rs.getTime("3000_meter"), rs.getInt("60_meter"),
+                        rs.getInt("krhev"), rs.getDouble("sargeant"), rs.getInt("beveg"));
 
                 toReturn.add(getTableModel);
 
