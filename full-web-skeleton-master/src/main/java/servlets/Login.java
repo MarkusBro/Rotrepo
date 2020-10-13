@@ -27,7 +27,6 @@ public class Login extends HttpServlet {
             request.setAttribute("name", name);
             response.sendRedirect("StartSide.jsp");
         } else {
-            request.setAttribute("errorMessage", "Invalid Credentials!!");
             response.sendRedirect("Login.jsp");
         }
     }
