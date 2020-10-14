@@ -42,7 +42,6 @@ public class ReceiveKlubb extends AbstractAppServlet {
         String klubb = req.getParameter("uklubb");
         List<TableModel> klubbFromDn = UserRepository.getKlubb(klubb, out);
         //req.getRequestDispatcher("viewSearch.jsp").forward(req, res);
-
         out.format("<h1>Klubb:%s", klubb);
         out.println("<table classname='table table-dark'>");
         out.println("<tr style= border: 2px solid: black;>");
