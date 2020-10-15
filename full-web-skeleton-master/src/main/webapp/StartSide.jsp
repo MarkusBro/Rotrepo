@@ -26,7 +26,7 @@
         </button>
     </div>
     <p>Click here to send a request for a user.
-        <a href="RequestUserNameFromDb">get user</a></p>
+        <a href="RequestUserNameFromDb">get klubb</a></p>
     <div class="content">
         <small>Ny startside for testresultater</small>
         <h1>Testresultater</h1>
