@@ -38,12 +38,12 @@
             <h1>Logg inn</h1>
             <div class="textbox">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <input type="text" placeholder="Brukernavn" name="name" value="">
+                <input type="text" placeholder="Brukernavn" name="name" value="" REQUIRED>
 
             </div>
             <div class="textbox">
                 <i class="fa fa-lock" aria-hidden="true"></i>
-                <input type="password" placeholder="Password" name="password" value="">
+                <input type="password" placeholder="Password" name="password" value="" REQUIRED>
 
             </div>
             <input class="btn" type="submit" name="" value="Logg inn">
