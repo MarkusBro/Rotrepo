@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.TableModel;
+import models.UserInfoModel;
 import models.UserModel;
 import tools.DbTool;
 
@@ -19,12 +20,12 @@ public class UserRepository {
      *             Tips: Objektet må instansieres i en servlet før man kaller på addUser().
      * @param p    printwriter for å skrive ut html i servlet. F.eks SQL feilmeldinger eller annen info.
      */
-
-    public static void addUser(UserModel user, PrintWriter p) {
+/*
+    public static void addUser(UserModel user) {
         Connection db = null;
         PreparedStatement insertNewUser = null;
         try {
-            db = DbTool.getINSTANCE().dbLoggIn(p);
+            db = DbTool.getINSTANCE().dbLoggIn();
             db.setCatalog("oblig1");
             String query =
                     "INSERT INTO `user` (User_firstName, User_lastName,User_Email, User_password ) values (?,?,?,?)";
@@ -47,23 +48,22 @@ public class UserRepository {
         }
 
     }
-
+*/
     /**
      * henter ut spesifikk person fra databasen
      *
      * @param klubb brukerens epost-addresse ("trym@example.com");
-     * @param p     printwriter see metoden over.
      * @return et String objekt med eposten til brukeren.
      */
 
-    public static List<TableModel> getKlubb(String klubb, PrintWriter p) {
+    public static List<TableModel> getKlubb(String klubb){
         Connection db = null;
         PreparedStatement prepareStatement = null;
         List<TableModel> toReturn = new ArrayList<>();
         try {
-            db = DbTool.getINSTANCE().dbLoggIn(p);
+            db = DbTool.getINSTANCE().dbLoggIn();
             ResultSet rs = null;
-            String query = "SELECT * FROM mytable where Klubb  = ?";
+            String query = "SELECT * FROM mytable where klubb = ?";
             prepareStatement = db.prepareStatement(query);
             prepareStatement.setString(1, klubb);
             rs = prepareStatement.executeQuery();
@@ -86,13 +86,13 @@ public class UserRepository {
 
     }
 
-    public static List<TableModel> getResults(PrintWriter printWriter) {
+    public static List<TableModel> getResults() {
         Connection db = null;
         PreparedStatement prepareStatement = null;
 
         List<TableModel> toReturn = new ArrayList<>();
         try {
-            db = DbTool.getINSTANCE().dbLoggIn(printWriter);
+            db = DbTool.getINSTANCE().dbLoggIn();
             ResultSet rs = null;
             String query = "SELECT * FROM mytable";
             prepareStatement = db.prepareStatement(query);
@@ -104,6 +104,32 @@ public class UserRepository {
                         rs.getInt("krhev"), rs.getDouble("sargeant"), rs.getInt("beveg"));
 
                 toReturn.add(getTableModel);
+
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return toReturn;
+    }
+    public static List<UserInfoModel> newList(){
+        Connection db = null;
+        PreparedStatement prepareStatement = null;
+
+        List<UserInfoModel> toReturn = new ArrayList<>();
+        try {
+            db = DbTool.getINSTANCE().dbLoggIn();
+            ResultSet rs = null;
+            String query = "SELECT *From userInfo";
+            prepareStatement = db.prepareStatement(query);
+            rs = prepareStatement.executeQuery();
+            while (rs.next()) {
+                UserInfoModel getModel = new
+                        UserInfoModel(rs.getString("email"), rs.getString("password"), rs.getString("fname"),
+                        rs.getString("lname"), rs.getDate("dob"), rs.getString("bio"));
+
+                toReturn.add(getModel);
 
             }
 

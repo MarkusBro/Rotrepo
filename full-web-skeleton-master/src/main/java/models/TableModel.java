@@ -1,5 +1,8 @@
 package models;
 
+import jdk.nashorn.internal.codegen.LocalStateRestorationInfo;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Time;
 import java.text.DecimalFormat;
 import java.time.LocalTime;
@@ -10,28 +13,26 @@ public class TableModel {
     Integer Født;
     String Navn;
     String Klubb;
-    Time meter2000;
-    Time meter3000;
-    Integer meter60;
-    Integer krhev;
-    double sargeant;
-    Integer beveg;
+    Time Meter2000;
+    Time Meter3000;
+    Integer Meter60;
+    Integer Krhev;
+    double Sargeant;
+    Integer Beveg;
 
-    public TableModel(Integer rank, double score, Integer født,
-                      String navn, String klubb, Time meter2000,
-                      Time meter3000, Integer meter60, Integer krhev,
-                      double sargeant, Integer beveg) {
+    public TableModel(Integer rank, double score, Integer født, String navn, String klubb,Time meter2000, Time meter3000, Integer meter60, Integer krhev, double sargeant, Integer beveg) {
         Rank = rank;
         Score = score;
         Født = født;
         Navn = navn;
         Klubb = klubb;
-        this.meter2000 = meter2000;
-        this.meter3000 = meter3000;
-        this.meter60 = meter60;
-        this.krhev = krhev;
-        this.sargeant = sargeant;
-        this.beveg = beveg;
+        Meter2000 = meter2000;
+        Meter3000 = meter3000;
+        Meter60  = meter60;
+        Krhev = krhev;
+        Sargeant = sargeant;
+        Beveg = beveg;
+
     }
 
     public Integer getRank() {
@@ -75,51 +76,51 @@ public class TableModel {
     }
 
     public Time getMeter2000() {
-        return meter2000;
+        return Meter2000;
     }
 
     public void setMeter2000(Time meter2000) {
-        this.meter2000 = meter2000;
+        Meter2000 = meter2000;
     }
 
     public Time getMeter3000() {
-        return meter3000;
+        return Meter3000;
     }
 
     public void setMeter3000(Time meter3000) {
-        this.meter3000 = meter3000;
+        Meter3000 = meter3000;
     }
 
-    public Integer getMeter60() {
-        return meter60;
+    public int getMeter60() {
+        return Meter60;
     }
 
     public void setMeter60(Integer meter60) {
-        this.meter60 = meter60;
+        Meter60 = meter60;
     }
 
     public Integer getKrhev() {
-        return krhev;
+        return Krhev;
     }
 
     public void setKrhev(Integer krhev) {
-        this.krhev = krhev;
+        Krhev = krhev;
     }
 
     public double getSargeant() {
-        return sargeant;
+        return Sargeant;
     }
 
     public void setSargeant(double sargeant) {
-        this.sargeant = sargeant;
+        Sargeant = sargeant;
     }
 
     public Integer getBeveg() {
-        return beveg;
+        return Beveg;
     }
 
     public void setBeveg(Integer beveg) {
-        this.beveg = beveg;
+        Beveg = beveg;
     }
 }
 

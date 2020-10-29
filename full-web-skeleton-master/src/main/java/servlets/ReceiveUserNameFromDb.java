@@ -9,8 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import models.TableModel;
+import models.UserModel;
 import tools.repository.UserRepository;
 
 
@@ -38,10 +40,13 @@ public class ReceiveUserNameFromDb extends AbstractAppServlet {
      */
     @Override
     protected void writeBody(HttpServletRequest req, HttpServletResponse res, PrintWriter out) throws ServletException, IOException {
-        String username = req.getParameter("uname");
-        List<TableModel> tableModelList = UserRepository.getResults(out);
+
+        List<TableModel> tableModelList = UserRepository.getResults();
         req.setAttribute("table", tableModelList);
-        //req.getRequestDispatcher("viewSearch.jsp").forward(req, res);
+
+        HttpSession session = req.getSession(true);
+        session.setAttribute("table", tableModelList);
+        //getServletContext().getRequestDispatcher("tableJsp.jsp").forward(req, res);
 
         out.println("<h1> B jenter 2020: ");
         out.println("<table classname='table table-dark'>");
@@ -58,8 +63,9 @@ public class ReceiveUserNameFromDb extends AbstractAppServlet {
         for (TableModel model : tableModelList) {
 
             out.format("<tr style= border: 2px solid: black;> <td> %s </td><td> %s </td> <td>  %s </td> <td>  %s </td></tr>",
-                    model.getRank(), model.getScore(),model.getNavn(), model.getKlubb());
+                    model.getRank(), model.getScore(),model.getNavn(), model.getFødt());
         }
+
         req.setAttribute("liste", tableModelList);
 
 
@@ -102,8 +108,13 @@ public class ReceiveUserNameFromDb extends AbstractAppServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        response.sendRedirect("/viewSearch.jsp");
+
+        List<TableModel> tableModelList = UserRepository.getResults();
+        request.setAttribute("table", tableModelList);
+        //HttpSession session = request.getSession(true);
+        //session.setAttribute("table", tableModelList);
+        getServletContext().getRequestDispatcher("/viewSearch.jsp").forward(request, response);
+
     }
 
     /**
