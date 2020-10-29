@@ -9,6 +9,7 @@
 <%@ page import="tools.repository.UserRepository" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@include file="cssLoader.jsp" %>
+
 <html>
 <head>
 
@@ -25,12 +26,13 @@
              onclick="location.href='index.jsp'">
 
     </div>
+    <h1 style="color: white">Testresulater for jenter B</h1>
     <table width="1000px" align="center"
            style="border:2px solid #000000;">
         <tr>
             <td colspan=8 align="center"
                 style="background-color:white">
-                <b>Testresultater jenterB 2020</b></td>
+              </td>
         </tr>
         <tr style="background-color:white;">
 
@@ -47,24 +49,36 @@
             <td><b>Beveg</b></td>
 
         </tr>
+        <tbody>
 
+        <%
+            List<TableModel> tableModelList = UserRepository.getResults();
+
+            for (TableModel model : tableModelList) {
+        %>
+
+            <tr style="background-color: white">
+                <td><%=model.getRank()%></td>
+                <td><%=model.getScore()%></td>
+                <td><%=model.getFødt()%> </td>
+                <td><%=model.getNavn()%></td>
+                <td><%=model.getKlubb()%> </td>
+                <td><%=model.getMeter2000()%> </td>
+                <td><%=model.getMeter3000()%> </td>
+                <td><%=model.getMeter60()%> </td>
+                <td><%=model.getKrhev()%> </td>
+                <td><%=model.getSargeant()%> </td>
+                <td><%=model.getBeveg()%> </td>
+            </tr>
+
+        <%
+            }
+        %>
+
+
+        </tbody>
     </table>
 
-    <% List<TableModel> list = (ArrayList<TableModel>)request.getAttribute("table");
-
-        for(TableModel Model : list)
-        {
-            out.print("Rank: " + Model.getRank());
-            out.print("<br/>");
-            out.print("Name: " + Model.getNavn());
-            out.print("<br/>");
-            out.print("Født: " + Model.getFødt());
-
-            out.print("<br/>");
-            out.print("<br/>");
-        }
-
-    %>
 </div>
 
 </body>

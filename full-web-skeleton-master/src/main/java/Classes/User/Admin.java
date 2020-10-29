@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 public class Admin extends AbstractUser {
-    public Admin(String firstName, String lastName, Date dob) {
-        super(firstName, lastName, dob, UserType.ADMIN);
+    public Admin( int id, String firstName, String lastName, String password, Date dob) {
+        super( id, firstName, lastName,password, dob, UserType.ADMIN);
     }
 }

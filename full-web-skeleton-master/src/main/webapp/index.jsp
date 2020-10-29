@@ -33,6 +33,13 @@
             <h1>Testresultater</h1>
             <button class="button" onclick="location.href='ReceiveUserNameFromDb'" type="button">
                 Søk</button>
+
+            <button class="knapp1">
+
+            </button>
+            <button class="knapp2">
+
+            </button>
         </div>
     </div>
 

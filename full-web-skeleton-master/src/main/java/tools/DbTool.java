@@ -71,7 +71,7 @@ public final class DbTool {
      * @return connection to db
      * @throws SQLException if the connection fails
      */
-    public Connection dbLoggIn(PrintWriter out) throws SQLException {
+    public Connection dbLoggIn() throws SQLException {
         Connection toReturn = null;
         Map<String, String> result = getProperties();
 
@@ -86,7 +86,7 @@ public final class DbTool {
            
         } catch (SQLException e) {
             e.printStackTrace();
-            out.println("SQL Exception " + e);
+            System.out.println("SQL Exception " + e);
         }
         return toReturn;
     }

@@ -40,8 +40,10 @@ public class ReceiveKlubb extends AbstractAppServlet {
     @Override
     protected void writeBody(HttpServletRequest req, HttpServletResponse res, PrintWriter out) throws ServletException, IOException {
         String klubb = req.getParameter("uklubb");
-        List<TableModel> klubbFromDn = UserRepository.getKlubb(klubb, out);
-        //req.getRequestDispatcher("viewSearch.jsp").forward(req, res);
+        List<TableModel> klubbFromDn = UserRepository.getKlubb(klubb);
+        req.setAttribute("uklubb", klubb);
+        req.getRequestDispatcher("viewSearch.jsp").forward(req, res);
+
         out.format("<h1>Klubb:%s", klubb);
         out.println("<table classname='table table-dark'>");
         out.println("<tr style= border: 2px solid: black;>");
@@ -91,16 +93,21 @@ public class ReceiveKlubb extends AbstractAppServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
-     * @param response servlet response
+     * @param req  servlet request
+     * @param res servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        processRequest(request, response);
-        response.sendRedirect("/viewSearch.jsp");
+        String klubb = req.getParameter("uklubb");
+        List<TableModel> klubbFromDn = UserRepository.getKlubb(klubb);
+        req.setAttribute("table", klubbFromDn);
+        req.setAttribute("klubb", klubb);
+        req.getRequestDispatcher("tableJsp.jsp").forward(req, res);
+        //processRequest(request, response);
+
     }
 
     /**
