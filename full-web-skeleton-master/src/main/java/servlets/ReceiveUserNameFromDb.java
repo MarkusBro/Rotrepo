@@ -41,11 +41,6 @@ public class ReceiveUserNameFromDb extends AbstractAppServlet {
     @Override
     protected void writeBody(HttpServletRequest req, HttpServletResponse res, PrintWriter out) throws ServletException, IOException {
 
-        List<TableModel> tableModelList = UserRepository.getResults();
-        req.setAttribute("table", tableModelList);
-
-        HttpSession session = req.getSession(true);
-        session.setAttribute("table", tableModelList);
         //getServletContext().getRequestDispatcher("tableJsp.jsp").forward(req, res);
 
         out.println("<h1> B jenter 2020: ");
@@ -60,13 +55,7 @@ public class ReceiveUserNameFromDb extends AbstractAppServlet {
          * Looper over the list
          * print out rank, score name and club
          */
-        for (TableModel model : tableModelList) {
 
-            out.format("<tr style= border: 2px solid: black;> <td> %s </td><td> %s </td> <td>  %s </td> <td>  %s </td></tr>",
-                    model.getRank(), model.getScore(),model.getNavn(), model.getFødt());
-        }
-
-        req.setAttribute("liste", tableModelList);
 
 
     }
@@ -108,12 +97,9 @@ public class ReceiveUserNameFromDb extends AbstractAppServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        List<TableModel> tableModelList = UserRepository.getResults();
-        request.setAttribute("table", tableModelList);
         //HttpSession session = request.getSession(true);
         //session.setAttribute("table", tableModelList);
-        getServletContext().getRequestDispatcher("/viewSearch.jsp").forward(request, response);
+
 
     }
 

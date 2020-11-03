@@ -25,16 +25,7 @@ public class RequestUserNameFromDb extends AbstractAppServlet {
         out.println("  <input type='text' name='uklubb'/>");
         out.println("  <input type='submit' />");
         out.println("</form>");
-        out.println("<style>");     // start style
-        // enclose style attributes withing the <style> </style> elements
-        out.println("h1 {");        // note leading brace
-        out.println("color:white;");
-        out.println("background-color:blue;");
-        out.println("}");          // note trailing brace for h1 style
-        // add styles for other elements here using similar structure
-        // note that separate lines are used for clarity -
-        // all of the above could be one println
-        out.println("</style>");
+
 
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,6 +1,6 @@
 package servlets;
 
-import Classes.UserType;
+import tools.repository.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,6 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("StartSide.jsp").forward(req, resp);
 
     }
 
