@@ -24,21 +24,27 @@ public class AddUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
+        resp.setContentType("text/plain; charset=UTF-8");
+
         String email = req.getParameter("email");
-        String passord = req.getParameter("passord");
+        String password = req.getParameter("passord");
         String firstName = req.getParameter("fname");
         String lastName = req.getParameter("lname");
         String date = req.getParameter("dob");
         String bio = req.getParameter("bio");
         String userType = req.getParameter("usertype");
-        String className = req.getParameter("klasse");
-        String club = req.getParameter("klubb");
+        String className = req.getParameter("class");
+        String club = req.getParameter("club");
 
-        System.out.println(email + passord + firstName + lastName +
-                date + bio + userType + className + club);
-        UserInfoModel reqAddUserInfo = new UserInfoModel(email, passord, firstName, lastName,
+        System.out.println(email+"," + password+"," + firstName+"," + lastName+"," +
+                date+"," + bio+"," + userType+"," + className+"," + club);
+
+        UserInfoModel AddClub = new UserInfoModel(club);
+        //ClassRepository.addClub(AddClub);
+
+        UserInfoModel AddUser = new UserInfoModel(email, password, firstName, lastName,
                 date, bio,userType, className, club);
-        ClassRepository.addUser(reqAddUserInfo);
+        ClassRepository.addUser(AddUser);
         req.getRequestDispatcher("StartSide.jsp").forward(req, resp);
 
 

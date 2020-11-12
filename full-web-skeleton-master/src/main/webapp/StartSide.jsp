@@ -30,7 +30,7 @@
     <div class="content">
         <small>Ny startside for testresultater</small>
         <h1>Testresultater</h1>
-        <button class="button"type="button">
+        <button class="button"type="button" onclick="location.href='tableJsp.jsp'">
             Søk
         </button>
     </div>

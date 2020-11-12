@@ -27,20 +27,18 @@ public class ClassRepository {
         try {
             db = DbTool.getINSTANCE().dbLoggIn();
             db.setCatalog("roklubb");
-            String query =
-                    "INSERT INTO roklubb.user (email, password, fname, lname, dob, bio,userType_name,class_name,club_name)\n" +
-                            "VALUES (?,?,?,?,?,?,?.?,?,?);";
-
+            String query = "INSERT INTO roklubb.user (email, userType_name, class_name, club_name,password, fname, lname, dob, bio) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             insertNewUser = db.prepareStatement(query);
             insertNewUser.setString(1, user.getEmail());
-            insertNewUser.setString(2, user.getPassword());
-            insertNewUser.setString(3, user.getFname());
-            insertNewUser.setString(4, user.getLname());
-            insertNewUser.setString(5, user.getDob());
-            insertNewUser.setString(6, user.getBio());
-            insertNewUser.setString(7, user.getUserType());
-            insertNewUser.setString(8, user.getClassName());
-            insertNewUser.setString(9, user.getClub());
+            insertNewUser.setString(2, user.getUserType());
+            insertNewUser.setString(3, user.getClassName());
+            insertNewUser.setString(4, user.getClub());
+            insertNewUser.setString(5, user.getPassword());
+            insertNewUser.setString(6, user.getFirstName());
+            insertNewUser.setString(7, user.getLastName());
+            insertNewUser.setString(8, user.getDob());
+            insertNewUser.setString(9, user.getBio());
             insertNewUser.execute();
 
         } catch (SQLException throwables) {
@@ -53,7 +51,27 @@ public class ClassRepository {
             }
         }
     }
+    public static void addClub(UserInfoModel user) {
+        Connection db = null;
+        PreparedStatement insertNewUser = null;
+        try {
+            db = DbTool.getINSTANCE().dbLoggIn();
+            db.setCatalog("roklubb");
+            String query = "INSERT INTO roklubb.club (name) VALUES (?)";
+            insertNewUser = db.prepareStatement(query);
+            insertNewUser.setString(1, user.getClub());
+            insertNewUser.execute();
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                db.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
     /**
      * henter ut spesifikk person fra databasen
      * <p>
@@ -69,16 +87,16 @@ public class ClassRepository {
         try {
             db = DbTool.getINSTANCE().dbLoggIn();
             ResultSet rs = null;
-            String query = "SELECT roklubb.user.fname, roklubb.user.lname, roklubb.user.club_name, roklubb.user.class_name,roklubb.testBatch.startDate, 5kmW, 5kmT, 2kmW, 2kmT, 60sW, percentLieRow, kgLieRow, percentSquat, kgSquat, flexibility\n" +
-                    "FROM roklubb.testResult\n" +
-                    "         INNER JOIN roklubb.user ON testResult.user_id = user.id\n" +
-                    "         INNER JOIN roklubb.testBatch on roklubb.testBatch.id = testBatch_id\n" +
-                    "          where class_name ='Senior Mann'";
+            String query = "SELECT roklubb.user.fname, roklubb.user.lname, roklubb.user.club_name, roklubb.testResult.class_name_static,roklubb.testBatch.startDate, 5kmW, 5kmT, 2kmW, 2kmT, 60sW, percentLieRow, kgLieRow, percentSquat, kgSquat, flexibility\n" +
+                    "                    FROM roklubb.testResult\n" +
+                    "                             INNER JOIN roklubb.user ON testResult.user_id = user.id\n" +
+                    "                            INNER JOIN roklubb.testBatch on roklubb.testBatch.id = testBatch_id\n" +
+                    "                           where class_name_static = 'Senior Mann';";
             prepareStatement = db.prepareStatement(query);
             rs = prepareStatement.executeQuery();
             while (rs.next()) {
                 ClassResultatsModel getTableModel = new
-                        ClassResultatsModel(rs.getString("fname"), rs.getString("lname"), rs.getString("club_name"), rs.getString("class_name"), rs.getDate("startDate"), rs.getDouble("5kmW")
+                        ClassResultatsModel(rs.getString("fname"), rs.getString("lname"), rs.getString("club_name"), rs.getString("class_name_static"), rs.getDate("startDate"), rs.getDouble("5kmW")
                         , rs.getTime("5kmT"), rs.getDouble("2kmW"), rs.getTime("2kmT"), rs.getDouble("60sW"), rs.getDouble("percentLieRow"),
                         rs.getDouble("kgLieRow"), rs.getDouble("percentSquat"), rs.getDouble("kgSquat"), rs.getInt("flexibility"));
 
@@ -110,7 +128,7 @@ public class ClassRepository {
             while (rs.next()) {
                 UserInfoModel getModel = new
                         UserInfoModel(rs.getString("email"), rs.getString("password"), rs.getString("fname"),
-                        rs.getString("lname"), rs.getString("dob"), rs.getString("bio"), rs.getString("usertype"), rs.getString("classname"),rs.getString("club"));
+                        rs.getString("lname"), rs.getString("dob"), rs.getString("bio"), rs.getString("usertype"), rs.getString("classname"), rs.getString("club"));
 
                 toReturn.add(getModel);
 

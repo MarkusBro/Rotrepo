@@ -26,7 +26,6 @@ public class RequestUserNameFromDb extends AbstractAppServlet {
         out.println("  <input type='submit' />");
         out.println("</form>");
 
-
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
