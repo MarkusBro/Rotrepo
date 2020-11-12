@@ -41,6 +41,7 @@
         }
         .navbar{
             background-color: darkgray;
+            left: 0%;
         }
 
     </style>
@@ -51,9 +52,8 @@
 
 <div class="navbar">
     <img src="${pageContext.request.contextPath}/bilder/norges-roforbund-logo.png" class="logo">
-    <button class="button2">Registrer deg</button>
-    <button class="button" onclick="location.href='Login.jsp'" type="button">
-        Logg inn</button>
+    <button class="button2">Min side</button>
+
 </div>
 <div class="Table">
     <h1>Senior menn</h1>

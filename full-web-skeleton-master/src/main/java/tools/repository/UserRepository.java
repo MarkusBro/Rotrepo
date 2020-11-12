@@ -20,35 +20,6 @@ public class UserRepository {
      *             Tips: Objektet må instansieres i en servlet før man kaller på addUser().
      * @param p    printwriter for å skrive ut html i servlet. F.eks SQL feilmeldinger eller annen info.
      */
-/*
-    public static void addUser(UserModel user) {
-        Connection db = null;
-        PreparedStatement insertNewUser = null;
-        try {
-            db = DbTool.getINSTANCE().dbLoggIn();
-            db.setCatalog("oblig1");
-            String query =
-                    "INSERT INTO `user` (User_firstName, User_lastName,User_Email, User_password ) values (?,?,?,?)";
-
-            insertNewUser = db.prepareStatement(query);
-            insertNewUser.setString(1, user.getFirstName());
-            insertNewUser.setString(2, user.getLastName());
-            insertNewUser.setString(3, user.getUserName());
-            insertNewUser.setString(4, user.getPassword());
-            insertNewUser.execute();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } finally {
-            try {
-                db.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-
-    }
-*/
     /**
      * henter ut spesifikk person fra databasen
      *
@@ -86,59 +57,7 @@ public class UserRepository {
 
     }
 
-    public static List<TableModel> getResults() {
-        Connection db = null;
-        PreparedStatement prepareStatement = null;
 
-        List<TableModel> toReturn = new ArrayList<>();
-        try {
-            db = DbTool.getINSTANCE().dbLoggIn();
-            ResultSet rs = null;
-            String query = "SELECT * FROM mytable";
-            prepareStatement = db.prepareStatement(query);
-            rs = prepareStatement.executeQuery();
-            while (rs.next()) {
-                TableModel getTableModel = new
-                        TableModel(rs.getInt("Rank"), rs.getDouble("score"), rs.getInt("Født"), rs.getString("Navn"),
-                        rs.getString("Klubb"), rs.getTime("2000_meter"), rs.getTime("3000_meter"), rs.getInt("60_meter"),
-                        rs.getInt("krhev"), rs.getDouble("sargeant"), rs.getInt("beveg"));
-
-                toReturn.add(getTableModel);
-
-            }
-
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return toReturn;
-    }
-    public static List<UserInfoModel> newList(){
-        Connection db = null;
-        PreparedStatement prepareStatement = null;
-
-        List<UserInfoModel> toReturn = new ArrayList<>();
-        try {
-            db = DbTool.getINSTANCE().dbLoggIn();
-            ResultSet rs = null;
-            String query = "SELECT *From userInfo";
-            prepareStatement = db.prepareStatement(query);
-            rs = prepareStatement.executeQuery();
-            while (rs.next()) {
-                UserInfoModel getModel = new
-                        UserInfoModel(rs.getString("email"), rs.getString("password"), rs.getString("fname"),
-                        rs.getString("lname"), rs.getDate("dob"), rs.getString("bio"));
-
-                toReturn.add(getModel);
-
-            }
-
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return toReturn;
-    }
 
 
 }
