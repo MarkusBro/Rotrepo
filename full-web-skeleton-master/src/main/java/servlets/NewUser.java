@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
 
-@WebServlet(name = "adduser", urlPatterns = {"/AddUser"})
-public class AddUser extends HttpServlet {
+@WebServlet(name = "NewUser", urlPatterns = {"/NewUser"})
+public class NewUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,8 +24,8 @@ public class AddUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
-        resp.setContentType("text/plain; charset=UTF-8");
 
+        String ID = req.getParameter("ID");
         String email = req.getParameter("email");
         String password = req.getParameter("passord");
         String firstName = req.getParameter("fname");
@@ -40,9 +40,10 @@ public class AddUser extends HttpServlet {
                 date+"," + bio+"," + userType+"," + className+"," + club);
 
         UserInfoModel AddClub = new UserInfoModel(club);
-        //ClassRepository.addClub(AddClub);
+        //en if her om å sjekke om klubben er i databasen
+        ClassRepository.addClub(AddClub);
 
-        UserInfoModel AddUser = new UserInfoModel(email, password, firstName, lastName,
+        UserInfoModel AddUser = new UserInfoModel(ID,email, password, firstName, lastName,
                 date, bio,userType, className, club);
         ClassRepository.addUser(AddUser);
         req.getRequestDispatcher("StartSide.jsp").forward(req, resp);
