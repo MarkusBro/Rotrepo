@@ -16,6 +16,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("StartSide.jsp").forward(req, resp);
 
     }
 
@@ -29,7 +30,6 @@ public class Login extends HttpServlet {
 
         try {
             if (userdb.checklogin(name,password)){
-                request.setAttribute("name", name);
                 request.getRequestDispatcher("StartSide.jsp").forward(request,response);
 
             }else {

@@ -67,7 +67,6 @@ public final class DbTool {
     /**
      * Establishes a connection with a mariaDB or returns an existing one.
      *
-     * @param out for html printing in front-end e.g. (for errors or content)
      * @return connection to db
      * @throws SQLException if the connection fails
      */
